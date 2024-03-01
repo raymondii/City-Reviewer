@@ -3,11 +3,20 @@ const gql = String.raw;
 const typeDefs = gql`
   type Review {
     _id: ID
-    stars: Int
+    cityName: String
+    cityRating: Int
     body: String
-    user: User
     createdAt: String
     updatedAt: String
+    dayActivitiesRating: Int
+    nightLifeRating: Int
+    outdoorActivitiesRating: Int
+    costRating: Int
+    foodRating: Int
+    peopleRating: Int
+    safetyRating: Int
+    weatherRating: Int
+    user: User
   }
 
   type User {
@@ -24,18 +33,29 @@ const typeDefs = gql`
   }
 
   type Query {
-    hello: String
-    another: String
     getAllReviews: [Review]
     getUserReviews: [Review]
     authenticate: User
   }
 
   type Mutation {
-    createReview(text: String!): Success
-    registerUser(username: String, email: String!, password: String!): User
+    registerUser(username: String!, email: String!, password: String!): User
     loginUser(email: String!, password: String!): User
     logoutUser: Success
+
+    createReview(
+      cityRating: Int
+      body: String!
+      foodRating: Int
+      nightLifeRating: Int
+      dayActivitiesRating: Int
+      peopleRating: Int
+      safetyRating: Int
+      weatherRating: Int
+      costRating: Int
+      outdoorActivitiesRating: Int
+    ): Success
+    deleteReview(review_id: ID): Success
   }
 `;
 

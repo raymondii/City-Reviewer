@@ -2,20 +2,83 @@ const { Schema, model } = require('mongoose');
 
 const reviewSchema = new Schema(
   {
-    stars: {
+    cityName: {
+      type: String,
+      required: [true, 'Please enter city name!'],
+    },
+
+    cityRating: {
       type: Number,
-      required: true,
+      default: 0,
       min: [1, 'Rating must be at least 1'],
       max: [5, 'Rating cannot be more than 5'],
     },
+
     body: {
       type: String,
       required: true,
     },
+
     user: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: 'User',
+    },
+
+    foodRating: {
+      type: Number,
+      default: 0,
+      min: [1, 'Rating must be at least 1'],
+      max: [5, 'Rating cannot be more than 5'],
+    },
+
+    nightLifeRating: {
+      type: Number,
+      default: 0,
+      min: [1, 'Rating must be at least 1'],
+      max: [5, 'Rating cannot be more than 5'],
+    },
+
+    dayActivitiesRating: {
+      type: Number,
+      default: 0,
+      min: [1, 'Rating must be at least 1'],
+      max: [5, 'Rating cannot be more than 5'],
+    },
+
+    peopleRating: {
+      type: Number,
+      default: 0,
+      min: [1, 'Rating must be at least 1'],
+      max: [5, 'Rating cannot be more than 5'],
+    },
+
+    safetyRating: {
+      type: Number,
+      default: 0,
+      min: [1, 'Rating must be at least 1'],
+      max: [5, 'Rating cannot be more than 5'],
+    },
+
+    weatherRating: {
+      type: Number,
+      default: 0,
+      min: [1, 'Rating must be at least 1'],
+      max: [5, 'Rating cannot be more than 5'],
+    },
+
+    costRating: {
+      type: Number,
+      default: 0,
+      min: [1, 'Rating must be at least 1'],
+      max: [5, 'Rating cannot be more than 5'],
+    },
+
+    outdoorActivitiesRating: {
+      type: Number,
+      default: 0,
+      min: [1, 'Rating must be at least 1'],
+      max: [5, 'Rating cannot be more than 5'],
     },
   },
   {
