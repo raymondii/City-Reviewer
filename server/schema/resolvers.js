@@ -23,6 +23,7 @@ module.exports = {
   },
 };
 
+// From JD MERN
 // const user_resolvers = require('./lib/user_resolvers')
 // const note_resolvers = require('./lib/note_resolvers')
 
