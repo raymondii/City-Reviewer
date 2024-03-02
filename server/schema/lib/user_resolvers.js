@@ -4,6 +4,7 @@ const { User } = require('../../models');
 
 module.exports = {
   queries: {
+    // AUTHETICATE USER BY COOKIE TOKEN
     async authenticate(_, __, { req }) {
       const token = req.cookies.token;
 
@@ -21,16 +22,27 @@ module.exports = {
       }
     },
 
-    getUserReviews: protect(async (_, __, { user_id }) => {
-      const user = await User.findById(user_id).populate('reviews');
+    // GET USER BY ID
+    getUserbyId: async (_, { user_id }) => {
+      try {
+        console.log('User ID:', user_id);
+        const user = await User.findById(user_id).populate('reviews');
 
-      return user.reviews;
-    }),
+        if (!user) {
+          throw new Error('User not found');
+        }
+
+        return user;
+      } catch (error) {
+        throw new Error('Failed to fetch user');
+      }
+    },
   },
 
   mutations: {
+    // CREATE USER
     async registerUser(_, args, { res }) {
-      console.log(args);
+      console.log('User:', args);
       try {
         const user = await User.create(args);
 
@@ -62,7 +74,9 @@ module.exports = {
       }
     },
 
+    // LOG IN USER
     async loginUser(_, args, { res }) {
+      console.log('User:', args);
       const user = await User.findOne({
         email: args.email,
       });
@@ -84,6 +98,7 @@ module.exports = {
       return user;
     },
 
+    // LOG OUT USER
     logoutUser(_, __, { res }) {
       try {
         res.clearCookie('token');
