@@ -34,7 +34,8 @@ const typeDefs = gql`
 
   type Query {
     getAllReviews: [Review]
-    getUserReviews: [Review]
+    getReviewById(review_id: ID!): Review
+    getUserbyId(user_id: ID!): User
     authenticate: User
   }
 
@@ -45,8 +46,21 @@ const typeDefs = gql`
 
     createReview(
       cityName: String!
-      cityRating: Int
+      cityRating: Int!
       body: String!
+      dayActivitiesRating: Int!
+      outdoorActivitiesRating: Int!
+      nightLifeRating: Int!
+      costRating: Int!
+      foodRating: Int!
+      peopleRating: Int!
+      safetyRating: Int!
+      weatherRating: Int!
+    ): Review
+    updateReview(
+      cityName: String
+      cityRating: Int
+      body: String
       dayActivitiesRating: Int
       outdoorActivitiesRating: Int
       nightLifeRating: Int
@@ -55,8 +69,8 @@ const typeDefs = gql`
       peopleRating: Int
       safetyRating: Int
       weatherRating: Int
-    ): Review
-    # updateReview()
+      review_id: ID
+    ): Success
     deleteReview(review_id: ID): Success
   }
 `;

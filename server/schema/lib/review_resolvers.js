@@ -3,49 +3,34 @@ const { GraphQLError } = require('graphql');
 const { protect } = require('../../config/auth');
 
 const resolvers = {
-  Query: {
+  // GET ALL REVIEWS
+  queries: {
     getAllReviews: async () => {
       try {
-        const reviews = await Review.find();
+        const reviews = await Review.find().populate('user');
         return reviews;
       } catch (error) {
         throw new Error('Failed to fetch reviews');
       }
     },
-    getReviewById: async (_, { id }) => {
+
+    // GET REVIEW BY ID
+    getReviewById: async (_, { review_id }) => {
       try {
-        const review = await Review.findById(id);
+        console.log('Review ID:', review_id);
+        const review = await Review.findById(review_id);
         return review;
       } catch (error) {
         throw new Error('Failed to fetch review');
       }
     },
-    addStarToReview: async (_, { id, stars }) => {
-      try {
-        // Find the review by ID
-        const review = await Review.findById(id);
-
-        // Check if the review exists
-        if (!review) {
-          throw new Error('Review not found');
-        }
-
-        // Update the star count of the review
-        review.stars = stars;
-        await review.save();
-
-        // Return the updated review
-        return review;
-      } catch (error) {
-        throw new Error('Failed to update review stars');
-      }
-    },
   },
 
-  Mutation: {
+  mutations: {
+    // CREATE REVIEW
     createReview: protect(async (_, args, { req, res, user_id }) => {
       try {
-        console.log('Review Resolver', args);
+        console.log(user_id);
 
         const user = await User.findById(user_id);
         const review = await Review.create({
@@ -70,7 +55,7 @@ const resolvers = {
         return review;
       } catch (err) {
         let errors = [];
-
+        console.log('Review Resolver', args);
         for (let prop in err.errors) {
           errors.push(err.errors[prop].message);
         }
@@ -79,22 +64,48 @@ const resolvers = {
       }
     }),
 
-    updateReview: async (_, { id, input }) => {
+    // UPDATE REVIEW
+    updateReview: protect(async (_, args) => {
       try {
-        const review = await Review.findByIdAndUpdate(id, input, { new: true });
-        return review;
-      } catch (error) {
+        const review = await Review.findByIdAndUpdate(args.review_id, {
+          cityName: args.cityName,
+          cityRating: args.cityRating,
+          body: args.body,
+          dayActivitiesRating: args.dayActivitiesRating,
+          nightLifeRating: args.nightLifeRating,
+          outdoorActivitiesRating: args.outdoorActivitiesRating,
+          costRating: args.costRating,
+          foodRating: args.foodRating,
+          peopleRating: args.peopleRating,
+          safetyRating: args.safetyRating,
+          weatherRating: args.weatherRating,
+        });
+
+        return {
+          message: 'Review updated successfully!',
+        };
+      } catch (err) {
         throw new Error('Failed to update review');
       }
-    },
-    deleteReview: async (_, { id }) => {
+    }),
+
+    // DELETE REVIEW
+    deleteReview: protect(async (_, args, { user_id }) => {
       try {
-        const review = await Review.findByIdAndDelete(id);
-        return review;
-      } catch (error) {
+        await Review.findByIdAndDelete(args.review_id);
+        await User.findByIdAndUpdate(user_id, {
+          $pull: {
+            reviews: args.review_id,
+          },
+        });
+
+        return {
+          message: 'Review deleted successfully!',
+        };
+      } catch (err) {
         throw new Error('Failed to delete review');
       }
-    },
+    }),
   },
 };
 

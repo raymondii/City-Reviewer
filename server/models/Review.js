@@ -10,8 +10,7 @@ const reviewSchema = new Schema(
     cityRating: {
       type: Number,
       default: 0,
-      min: [1, 'Rating must be at least 1'],
-      max: [5, 'Rating cannot be more than 5'],
+      required: [true, 'Please enter a rating!'],
     },
 
     body: {
@@ -28,57 +27,49 @@ const reviewSchema = new Schema(
     foodRating: {
       type: Number,
       default: 0,
-      min: [1, 'Rating must be at least 1'],
-      max: [5, 'Rating cannot be more than 5'],
+      required: [true, 'Please enter a rating!'],
     },
 
     nightLifeRating: {
       type: Number,
       default: 0,
-      min: [1, 'Rating must be at least 1'],
-      max: [5, 'Rating cannot be more than 5'],
+      required: [true, 'Please enter a rating!'],
     },
 
     dayActivitiesRating: {
       type: Number,
       default: 0,
-      min: [1, 'Rating must be at least 1'],
-      max: [5, 'Rating cannot be more than 5'],
+      required: [true, 'Please enter a rating!'],
     },
 
     peopleRating: {
       type: Number,
       default: 0,
-      min: [1, 'Rating must be at least 1'],
-      max: [5, 'Rating cannot be more than 5'],
+      required: [true, 'Please enter a rating!'],
     },
 
     safetyRating: {
       type: Number,
       default: 0,
-      min: [1, 'Rating must be at least 1'],
-      max: [5, 'Rating cannot be more than 5'],
+      required: [true, 'Please enter a rating!'],
     },
 
     weatherRating: {
       type: Number,
       default: 0,
-      min: [1, 'Rating must be at least 1'],
-      max: [5, 'Rating cannot be more than 5'],
+      required: [true, 'Please enter a rating!'],
     },
 
     costRating: {
       type: Number,
       default: 0,
-      min: [1, 'Rating must be at least 1'],
-      max: [5, 'Rating cannot be more than 5'],
+      required: [true, 'Please enter a rating!'],
     },
 
     outdoorActivitiesRating: {
       type: Number,
       default: 0,
-      min: [1, 'Rating must be at least 1'],
-      max: [5, 'Rating cannot be more than 5'],
+      required: [true, 'Please enter a rating!'],
     },
   },
   {
