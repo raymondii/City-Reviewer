@@ -43,19 +43,12 @@ const resolvers = {
   },
 
   Mutation: {
-    // createReview: async (_, { input }) => {
-    //   try {
-    //     const review = await Review.create(input);
-    //     return review;
-    //   } catch (error) {
-    //     throw new Error('Failed to create review');
-    //   }
-    // },
-
     createReview: protect(async (_, args, { req, res, user_id }) => {
       try {
+        console.log('Review Resolver', args);
+
         const user = await User.findById(user_id);
-        const review = await review.create({
+        const review = await Review.create({
           cityName: args.cityName,
           cityRating: args.cityRating,
           body: args.body,

@@ -1,75 +1,71 @@
 import { Routes, Route } from 'react-router-dom'
 
-import Header from './components/header'
+import Header from './components/Header'
 
 import Home from './pages/Home'
-import Login from './pages/Login'
+import AuthForm from './pages/AuthForm'
+import Protect from './components/Protect'
 import Dashboard from './pages/Dashboard'
-import CreateAccount from './pages/CreateAccount'
-import SeeMoreReview from './pages/SeeMoreReview'
-import UserReviews from './pages/UsersReviews'
+import Review from './pages/Review'
+import User from './pages/User'
 import WriteAReview from './pages/WriteAReview'
+import NotFound from './pages/NotFound'
 
-import { useStore } from 'react'
+import { useStore } from './store'
 
 function App() {
-    const { state } = useStore()
-  
-    return (
-      <>
-        <Header />
-  
-        {state.loading && <Loading />}
-  
-        {state.showNoteForm &&
-          <NoteForm />}
-  
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home />} />
-  
-          <Route path="/login" element={(
-            <Protect>
-              <Login />
-            </Protect>
-          )} />
-          <Route path="/dashboard" element={(
-            <Protect>
-              <Dashboard />
-            </Protect>
-          )} />
+  const { state } = useStore();
 
-          <Route path='/createAccount' element={(
-            <Protect>
-                <CreateAccount />
-            </Protect>
-          )} />
+  return (
+    <>
+      <Header />
 
-          <Route path='/seemorereview' element={(
-            <Protect>
-                <SeeMoreReview />
-            </Protect>
-          )} />
+      {/* {state.loading && <Loading />}
 
-          <Route path='/writeareview' element={(
-            <Protect>
-                <WriteAReview />
-            </Protect>
-          )} />
+      {state.showNoteForm &&
+        <NoteForm />} */}
 
-          <Route path='/userreviews' element={(
-            <Protect>
-                <UserReviews />
-            </Protect>
-          )} />
+      <Routes>
+      <Route
+          path="/"
+          element={
+            <Home />} />
+
+      <Route path="/auth" element={(
+          <Protect>
+            <AuthForm />
+          </Protect>
+        )} />
+
+      <Route path="/dashboard" element={(
+            <Dashboard />
+        )} />
+
+      <Route path='/review' element={(
+            <Review />
   
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </>
-    )
-  }
-  
+        )} />
+
+<Route path='/writeareview' element={(
+          <Protect>
+            <WriteAReview />
+          </Protect>
+        )} />
+
+<Route path='/user' element={(
+          <Protect>
+            <User />
+          </Protect>
+        )} />
+        
+
+        <Route path="*" element={<NotFound />} />
+        
+    
+      </Routes>
+    </>
+  )
+}
+
 
 export default App;

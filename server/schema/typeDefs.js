@@ -44,17 +44,19 @@ const typeDefs = gql`
     logoutUser: Success
 
     createReview(
+      cityName: String!
       cityRating: Int
       body: String!
-      foodRating: Int
-      nightLifeRating: Int
       dayActivitiesRating: Int
+      outdoorActivitiesRating: Int
+      nightLifeRating: Int
+      costRating: Int
+      foodRating: Int
       peopleRating: Int
       safetyRating: Int
       weatherRating: Int
-      costRating: Int
-      outdoorActivitiesRating: Int
-    ): Success
+    ): Review
+    # updateReview()
     deleteReview(review_id: ID): Success
   }
 `;

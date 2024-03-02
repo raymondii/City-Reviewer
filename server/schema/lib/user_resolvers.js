@@ -24,12 +24,13 @@ module.exports = {
     getUserReviews: protect(async (_, __, { user_id }) => {
       const user = await User.findById(user_id).populate('reviews');
 
-      return user.notes;
+      return user.reviews;
     }),
   },
 
   mutations: {
     async registerUser(_, args, { res }) {
+      console.log(args);
       try {
         const user = await User.create(args);
 

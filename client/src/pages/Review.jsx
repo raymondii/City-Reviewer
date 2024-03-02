@@ -1,7 +1,7 @@
-function SeeMoreReview() {
+function Review() {
     return (
         <h1>See More Reviews</h1>
     )
 }
 
-export default SeeMoreReview
+export default Review
