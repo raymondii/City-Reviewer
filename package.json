@@ -1,1 +1,14 @@
-{}
+{
+  "name": "city-reviewer",
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "scripts": {
+    "dev": "concurrently \"cd ./client && npm run dev\" \"cd ./server && npm run dev\""
+  },
+  "author": "",
+  "license": "ISC"
+}
