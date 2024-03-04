@@ -4,13 +4,28 @@ import './header.css';
 
 import { useStore } from '../store';
 import { useMutation, gql } from '@apollo/client';
+import { LOGOUT_USER } from '../graphql/mutations';
 
 const Header = () => {
-  const { state, dispatch } = useStore();
+  const { state, setState } = useStore();
   const navigate = useNavigate();
 
-  const handleLogoutUser = () => {
+  const [logoutUser] = useMutation(LOGOUT_USER, {
+    update(cache) {
+      cache.evict({ fieldName: 'getUserNotes' });
+    },
+  });
+
+  const handleLogoutUser = async () => {
     // Add logic to handle logout
+    await logoutUser();
+
+    setState({
+      ...state,
+      user: null,
+    });
+
+    navigate('/');
   };
 
   return (
@@ -25,27 +40,65 @@ const Header = () => {
             <h1 className='text-3xl font-bold text-slate-950'>City Review</h1>
           </a>
           <div className='flex items-center'>
-            <NavLink
-              to='#'
-              style={{ textDecoration: 'none' }}
-              className='text-slate-950 font-lg font-bold rounded-lg text-base py-2 lg:py-2.5 mr-6'
-            >
-              Dashboard
-            </NavLink>
-            <NavLink
-              to='#'
-              style={{ textDecoration: 'none' }}
-              className='text-slate-950 font-lg font-bold rounded-lg text-base py-2 lg:py-2.5 mr-6'
-            >
-              Log in
-            </NavLink>
-            <NavLink
-              to='#'
-              style={{ textDecoration: 'none' }}
-              className='text-white bg-blue-700 hover:bg-blue-800 font-lg font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5'
-            >
-              Write A Review
-            </NavLink>
+            {state.user ? (
+              <>
+                <NavLink
+                  to='/dashboard'
+                  style={{ textDecoration: 'none' }}
+                  className='text-slate-950 font-lg font-bold rounded-lg text-base py-2 lg:py-2.5 mr-6'
+                >
+                  Dashboard
+                </NavLink>
+
+                <NavLink
+                  to='#'
+                  style={{ textDecoration: 'none' }}
+                  className='text-slate-950 font-lg font-bold rounded-lg text-base py-2 lg:py-2.5 mr-6'
+                >
+                  Your Reviews
+                </NavLink>
+
+                <NavLink
+                  onClick={handleLogoutUser}
+                  style={{ textDecoration: 'none' }}
+                  className='text-slate-950 font-lg font-bold rounded-lg text-base py-2 lg:py-2.5 mr-6'
+                >
+                  Log Out
+                </NavLink>
+                <NavLink
+                  to='/writeareview'
+                  style={{ textDecoration: 'none' }}
+                  className='text-white bg-blue-700 hover:bg-blue-800 font-lg font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5'
+                >
+                  Write A Review
+                </NavLink>
+              </>
+            ) : (
+              <>
+                {' '}
+                <NavLink
+                  to='/dashboard'
+                  style={{ textDecoration: 'none' }}
+                  className='text-slate-950 font-lg font-bold rounded-lg text-base py-2 lg:py-2.5 mr-6'
+                >
+                  Dashboard
+                </NavLink>
+                <NavLink
+                  to='/auth'
+                  style={{ textDecoration: 'none' }}
+                  className='text-slate-950 font-lg font-bold rounded-lg text-base py-2 lg:py-2.5 mr-6'
+                >
+                  Log in
+                </NavLink>
+                <NavLink
+                  to='/writeareview'
+                  style={{ textDecoration: 'none' }}
+                  className='text-white bg-blue-700 hover:bg-blue-800 font-lg font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5'
+                >
+                  Write A Review
+                </NavLink>
+              </>
+            )}
           </div>
         </div>
       </nav>
