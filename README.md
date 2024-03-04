@@ -1,8 +1,31 @@
-# React + Vite
+# City Reviewer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+City Reviewer is a web application that allows users to leave reviews for cities across America. Users can share their experiences, insights, and recommendations about various aspects of cities, including activities, food, safety, nightlife, and more.
 
-Currently, two official plugins are available:
+[![Alt text](image_path_or_url)](link_url)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- **User Reviews**: Users can leave reviews for cities based on their experiences.
+- **Multi-Aspect Reviews**: Reviews can cover various aspects of cities, such as activities, food, safety, and nightlife.
+- **Search Functionality**: Users can search for specific cities or browse through available reviews.
+- **User Authentication**: Secure user authentication system to protect user data and ensure privacy.
+- **Responsive Design**: The application is designed to work seamlessly on desktop and mobile devices.
+
+## Technologies Used
+
+- React: JavaScript library for building user interfaces.
+- React Router: Library for routing in React applications.
+- Tailwind CSS: Utility-first CSS framework for styling.
+- Apollo Client: GraphQL client for consuming GraphQL APIs.
+- GraphQL: Query language for APIs.
+- Express.js: Web application framework for Node.js.
+- MongoDB: NoSQL database for storing city reviews and user data.
+
+## Contributing
+
+- Contributions are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request.
+
+## License
+
+- This project is licensed under the MIT License.
