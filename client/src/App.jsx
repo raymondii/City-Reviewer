@@ -1,17 +1,17 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom';
 
-import Header from './components/Header'
+import Header from './components/Header';
 
-import Home from './pages/Home'
-import AuthForm from './pages/AuthForm'
-import Protect from './components/Protect'
-import Dashboard from './pages/Dashboard'
-import Review from './pages/Review'
-import User from './pages/User'
-import WriteAReview from './pages/WriteAReview'
-import NotFound from './pages/NotFound'
+import Home from './pages/Home';
+import AuthForm from './pages/AuthForm';
+import Protect from './components/Protect';
+import Dashboard from './pages/Dashboard';
+import Review from './pages/Review';
+import User from './pages/User';
+import WriteAReview from './pages/WriteAReview';
+import NotFound from './pages/NotFound';
 
-import { useStore } from './store'
+import { useStore } from './store';
 
 function App() {
   const { state } = useStore();
@@ -26,46 +26,43 @@ function App() {
         <NoteForm />} */}
 
       <Routes>
-      <Route
-          path="/"
+        <Route path='/' element={<Home />} />
+
+        <Route
+          path='/auth'
           element={
-            <Home />} />
+            <Protect>
+              <AuthForm />
+            </Protect>
+          }
+        />
 
-      <Route path="/auth" element={(
-          <Protect>
-            <AuthForm />
-          </Protect>
-        )} />
+        <Route path='/dashboard' element={<Dashboard />} />
 
-      <Route path="/dashboard" element={(
-            <Dashboard />
-        )} />
+        <Route path='/review' element={<Review />} />
 
-      <Route path='/review' element={(
-            <Review />
-  
-        )} />
-
-<Route path='/writeareview' element={(
-          <Protect>
+        <Route
+          path='/writeareview'
+          element={
+            // <Protect>
             <WriteAReview />
-          </Protect>
-        )} />
+            // </Protect>
+          }
+        />
 
-<Route path='/user' element={(
-          <Protect>
-            <User />
-          </Protect>
-        )} />
-        
+        <Route
+          path='/user'
+          element={
+            <Protect>
+              <User />
+            </Protect>
+          }
+        />
 
-        <Route path="*" element={<NotFound />} />
-        
-    
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </>
-  )
+  );
 }
-
 
 export default App;

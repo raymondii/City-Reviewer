@@ -21,6 +21,22 @@ a {
   text-decoration: none;
 }
 
+/* Radio Button Star Ratings */
+
+.rating {
+  display: flex;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+.star{
+  cursor: pointer;
+}
+
+/* Forms style */
+
 .container {
   background-color: #fff;
   border-radius: 30px;
@@ -213,7 +229,8 @@ a {
 }
 
 
- /* a {
+
+/* a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;

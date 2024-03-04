@@ -15,20 +15,27 @@ const Header = () => {
 
   return (
     <header>
-      <nav class='bg-white px-4 lg:px-6 py-4 border-b border-gray-300'>
-        <div class='flex flex-wrap justify-between items-center mx-auto max-w-screen-xl'>
+      <nav className='bg-white px-4 lg:px-6 py-4 border-b border-gray-300'>
+        <div className='flex flex-wrap justify-between items-center mx-auto max-w-screen-xl'>
           <a
             href='/'
             style={{ textDecoration: 'none' }}
-            class='flex items-center no-underline'
+            className='flex items-center no-underline'
           >
-            <h1 class='text-3xl font-bold text-slate-950'>City Review</h1>
+            <h1 className='text-3xl font-bold text-slate-950'>City Review</h1>
           </a>
-          <div class='flex items-center lg:order-2'>
+          <div className='flex items-center'>
             <NavLink
               to='#'
               style={{ textDecoration: 'none' }}
-              className='text-slate-950 font-lg font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2'
+              className='text-slate-950 font-lg font-bold rounded-lg text-base py-2 lg:py-2.5 mr-6'
+            >
+              Dashboard
+            </NavLink>
+            <NavLink
+              to='#'
+              style={{ textDecoration: 'none' }}
+              className='text-slate-950 font-lg font-bold rounded-lg text-base py-2 lg:py-2.5 mr-6'
             >
               Log in
             </NavLink>
