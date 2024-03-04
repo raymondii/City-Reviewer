@@ -26,6 +26,19 @@ a {
   text-decoration: none;
 }
 
+/* Radio Button Star Ratings */
+
+.rating {
+  display: flex;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+.star{
+  cursor: pointer;
+}
 /* a {
   font-weight: 500;
   color: #646cff;
