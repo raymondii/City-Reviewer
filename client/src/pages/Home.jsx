@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { useStore } from '../store';
+import { NavLink } from 'react-router-dom';
+
 
 function Home() {
   return (
@@ -22,22 +24,17 @@ function Home() {
           </div>
 
           <div className='flex justify-center px-4'>
-            <div className='w-[60rem] rounded-xl p-1 bg-white border-2 border-slate-950 flex'>
-              <input
-                type='search'
-                className='w-full border-none bg-transparent rounded-xlg m-1 px-4 py-1 text-gray-900'
-                placeholder='Search for city'
-              />
-              <button className='m-1 rounded-lg px-6 py-2 font-semibold text-gray-100 bg-blue-700 hover:bg-blue-800'>
-                Search
-              </button>
+            <div className='w-[60rem] rounded-xl p-1 border-slate-950 flex justify-center'>
+              <NavLink to="/dashboard" className='m-1 rounded-lg px-6 py-2 font-semibold text-gray-100 bg-blue-700 hover:bg-blue-800'>
+                Dashboard
+              </NavLink>
             </div>
           </div>
         </section>
 
         <section className='mb-20'>
           <div className='mx-auto max-w-7xl px-4'>
-            <h3 className='text-left mb-4 text-3xl font-bold text-slate-950'>
+            <h3 className='text-left mb-4 text-3xl font-bold text-slate-950 '>
               Best Cities for Summer 2024 ☀️
             </h3>
             <div className=' grid  grid-cols-2 gap-8'>
