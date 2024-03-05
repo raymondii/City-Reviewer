@@ -1,23 +1,31 @@
 import { useEffect } from 'react';
-import { useStore } from '../store';
+import { useQuery } from '@apollo/client';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+import { AUTHENTICATE } from '../graphql/queries';
+
 function Protect({ children }) {
-  const { state } = useStore()
-  const navigate = useNavigate()
-  const location = useLocation()
+  const { data: userData } = useQuery(AUTHENTICATE);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    if (state.user && location.pathname === '/auth') return navigate('/dashboard')
+    if (userData) {
+      const user = userData.authenticate;
 
-    if (!state.user && !location.pathname.includes('auth')) return navigate('/auth')
-  }, [state.user])
+      if (user && location.pathname === '/auth') {
+        console.log(user, 'logged in');
+        return navigate('/myreviews');
+      }
 
-  return (
-    <>
-      {children}
-    </>
-  )
+      if (!user && location.pathname.match(/[myreviews|write]/gi)) {
+        console.log('logged out');
+        return navigate('/auth');
+      }
+    }
+  }, [userData]);
+
+  return <>{children}</>;
 }
 
-export default Protect
+export default Protect;

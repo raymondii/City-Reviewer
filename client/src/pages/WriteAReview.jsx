@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 
 import { CREATE_REVIEW } from '../graphql/mutations';
-import { GET_ALL_REVIEWS } from '../graphql/queries';
+import { GET_ALL_REVIEWS, GET_USER_BY_ID } from '../graphql/queries';
 // import {  } from '../graphql/queries'
 
 function WriteAReview() {
@@ -14,22 +14,45 @@ function WriteAReview() {
   const [reviewCityName, setReviewCityName] = useState('');
   const navigate = useNavigate();
 
+  // Star rating states
+  const [cityRating, setCityRating] = useState(null);
+  const [dayActivitiesRating, setDayActivitiesRating] = useState(null);
+  const [outdoorActivitiesRating, setOutdoorActivitiesRating] = useState(null);
+  const [nightLifeRating, setNightLifeRating] = useState(null);
+  const [costRating, setCostRating] = useState(null);
+  const [foodRating, setFoodRating] = useState(null);
+  const [peopleRating, setPeopleRating] = useState(null);
+  const [safetyRating, setSafetyRating] = useState(null);
+  const [weatherRating, setWeatherRating] = useState(null);
+
+  const [hover, setHover] = useState({
+    cityRate: null,
+    dayActivitiesRate: null,
+    outdoorActivitiesRate: null,
+    nightlifeRate: null,
+    costRate: null,
+    foodRate: null,
+    peopleRate: null,
+    safetyRate: null,
+    weatherRate: null,
+  });
+
   const [createReview] = useMutation(CREATE_REVIEW, {
     variables: {
       cityName: reviewCityName,
       body: reviewBody,
-      cityRating: 5,
+      cityRating: cityRating,
 
-      dayActivitiesRating: 5,
-      outdoorActivitiesRating: 5,
-      nightLifeRating: 5,
-      costRating: 5,
-      foodRating: 5,
-      peopleRating: 5,
-      safetyRating: 5,
-      weatherRating: 5,
+      dayActivitiesRating: dayActivitiesRating,
+      outdoorActivitiesRating: outdoorActivitiesRating,
+      nightLifeRating: nightLifeRating,
+      costRating: costRating,
+      foodRating: foodRating,
+      peopleRating: peopleRating,
+      safetyRating: safetyRating,
+      weatherRating: weatherRating,
     },
-    refetchQueries: [GET_ALL_REVIEWS],
+    refetchQueries: [GET_ALL_REVIEWS, GET_USER_BY_ID],
   });
 
   const writeAReview = async (e) => {
@@ -52,13 +75,9 @@ function WriteAReview() {
     setReviewBody(e.target.value);
   };
 
-  // Star rating states
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
-
   return (
     <>
-      <section className='flex items-center mt-20 px-4'>
+      <section className='flex items-center mt-6 px-4'>
         <div className='bg-white p-8 rounded-xl shadow-md max-w-screen-lg w-full mx-auto border-2 border-slate-950'>
           <h2 className='text-3xl font-semibold mb-4'>Review City!</h2>
 
@@ -90,13 +109,13 @@ function WriteAReview() {
             </div>
 
             {/* Section for tags feature if possible */}
-
+            {/* RATING */}
             <div className='mt-4'>
               <h1
                 htmlFor='password'
                 className='block text-slate-950 font-lg font-bold rounded-lg text-base'
               >
-                Rate City
+                Rate City 🌟
               </h1>
               <div className='city-rating rating'>
                 {[...Array(5)].map((star, index) => {
@@ -107,24 +126,426 @@ function WriteAReview() {
                         type='radio'
                         name='rating'
                         value={currentRating}
-                        onClick={() => setRating(currentRating)}
+                        onClick={() => setCityRating(currentRating)}
                       />
                       <FaStar
                         className='star  mt-2 mr-2'
                         size={30}
                         color={
-                          currentRating <= (hover || rating)
+                          currentRating <= (hover.cityRate || cityRating)
                             ? '#2DC773'
                             : ' #7B8982'
                         }
-                        onMouseEnter={() => setHover(currentRating)}
-                        onMouseLeave={() => setHover(null)}
+                        onMouseEnter={() =>
+                          setHover({
+                            ...hover,
+                            cityRate: currentRating,
+                          })
+                        }
+                        onMouseLeave={() =>
+                          setHover({
+                            ...hover,
+                            cityRate: null,
+                          })
+                        }
                       />
                     </label>
                   );
                 })}
               </div>
-              <p>Stars: {rating}</p>
+              <p>Stars: {cityRating}</p>
+            </div>
+
+            <div className='flex flex-wrap'>
+              <div className='w-full md:w-1/2'>
+                {/* DAY ACT RATING */}
+                <div className='mt-4'>
+                  <h1
+                    htmlFor='password'
+                    className='block text-slate-950 font-lg font-bold rounded-lg text-base'
+                  >
+                    Rate Day Activities ☀️
+                  </h1>
+                  <div className='city-rating rating'>
+                    {[...Array(5)].map((star, index) => {
+                      const currentRating = index + 1;
+                      return (
+                        <label key={index}>
+                          <input
+                            type='radio'
+                            name='rating'
+                            value={currentRating}
+                            onClick={() =>
+                              setDayActivitiesRating(currentRating)
+                            }
+                          />
+                          <FaStar
+                            className='star  mt-2 mr-2'
+                            size={30}
+                            color={
+                              currentRating <=
+                              (hover.dayActivitiesRate || dayActivitiesRating)
+                                ? '#2DC773'
+                                : ' #7B8982'
+                            }
+                            onMouseEnter={() =>
+                              setHover({
+                                ...hover,
+                                dayActivitiesRate: currentRating,
+                              })
+                            }
+                            onMouseLeave={() =>
+                              setHover({
+                                ...hover,
+                                dayActivitiesRate: null,
+                              })
+                            }
+                          />
+                        </label>
+                      );
+                    })}
+                  </div>
+                  <p>Stars: {dayActivitiesRating}</p>
+                </div>
+
+                {/* OUTDOOR ACT RATING */}
+                <div className='mt-4'>
+                  <h1
+                    htmlFor='password'
+                    className='block text-slate-950 font-lg font-bold rounded-lg text-base'
+                  >
+                    Rate Outdoor Activities 🌳
+                  </h1>
+                  <div className='city-rating rating'>
+                    {[...Array(5)].map((star, index) => {
+                      const currentRating = index + 1;
+                      return (
+                        <label key={index}>
+                          <input
+                            type='radio'
+                            name='rating'
+                            value={currentRating}
+                            onClick={() =>
+                              setOutdoorActivitiesRating(currentRating)
+                            }
+                          />
+                          <FaStar
+                            className='star  mt-2 mr-2'
+                            size={30}
+                            color={
+                              currentRating <=
+                              (hover.outdoorActivitiesRate ||
+                                outdoorActivitiesRating)
+                                ? '#2DC773'
+                                : ' #7B8982'
+                            }
+                            onMouseEnter={() =>
+                              setHover({
+                                ...hover,
+                                outdoorActivitiesRate: currentRating,
+                              })
+                            }
+                            onMouseLeave={() =>
+                              setHover({
+                                ...hover,
+                                outdoorActivitiesRate: null,
+                              })
+                            }
+                          />
+                        </label>
+                      );
+                    })}
+                  </div>
+                  <p>Stars: {outdoorActivitiesRating}</p>
+                </div>
+
+                {/* NIGHTLIFE ACT RATING */}
+                <div className='mt-4'>
+                  <h1
+                    htmlFor='password'
+                    className='block text-slate-950 font-lg font-bold rounded-lg text-base'
+                  >
+                    Rate Nightlife Activities 🌃
+                  </h1>
+                  <div className='city-rating rating'>
+                    {[...Array(5)].map((star, index) => {
+                      const currentRating = index + 1;
+                      return (
+                        <label key={index}>
+                          <input
+                            type='radio'
+                            name='rating'
+                            value={currentRating}
+                            onClick={() => setNightLifeRating(currentRating)}
+                          />
+                          <FaStar
+                            className='star  mt-2 mr-2'
+                            size={30}
+                            color={
+                              currentRating <=
+                              (hover.nightlifeRate || nightLifeRating)
+                                ? '#2DC773'
+                                : ' #7B8982'
+                            }
+                            onMouseEnter={() =>
+                              setHover({
+                                ...hover,
+                                nightlifeRate: currentRating,
+                              })
+                            }
+                            onMouseLeave={() =>
+                              setHover({
+                                ...hover,
+                                nightlifeRate: null,
+                              })
+                            }
+                          />
+                        </label>
+                      );
+                    })}
+                  </div>
+                  <p>Stars: {nightLifeRating}</p>
+                </div>
+
+                {/* COST RATING */}
+                <div className='mt-4'>
+                  <h1
+                    htmlFor='password'
+                    className='block text-slate-950 font-lg font-bold rounded-lg text-base'
+                  >
+                    Rate Cost of City 💸
+                  </h1>
+                  <div className='city-rating rating'>
+                    {[...Array(5)].map((star, index) => {
+                      const currentRating = index + 1;
+                      return (
+                        <label key={index}>
+                          <input
+                            type='radio'
+                            name='rating'
+                            value={currentRating}
+                            onClick={() => setCostRating(currentRating)}
+                          />
+                          <FaStar
+                            className='star  mt-2 mr-2'
+                            size={30}
+                            color={
+                              currentRating <= (hover.costRate || costRating)
+                                ? '#2DC773'
+                                : ' #7B8982'
+                            }
+                            onMouseEnter={() =>
+                              setHover({
+                                ...hover,
+                                costRate: currentRating,
+                              })
+                            }
+                            onMouseLeave={() =>
+                              setHover({
+                                ...hover,
+                                costRate: null,
+                              })
+                            }
+                          />
+                        </label>
+                      );
+                    })}
+                  </div>
+                  <p>Stars: {costRating}</p>
+                </div>
+              </div>
+              <div className='w-full md:w-1/2'>
+                {/* FOOD RATING */}
+                <div className='mt-4'>
+                  <h1
+                    htmlFor='password'
+                    className='block text-slate-950 font-lg font-bold rounded-lg text-base'
+                  >
+                    Rate the Food 🌮
+                  </h1>
+                  <div className='city-rating rating'>
+                    {[...Array(5)].map((star, index) => {
+                      const currentRating = index + 1;
+                      return (
+                        <label key={index}>
+                          <input
+                            type='radio'
+                            name='rating'
+                            value={currentRating}
+                            onClick={() => setFoodRating(currentRating)}
+                          />
+                          <FaStar
+                            className='star  mt-2 mr-2'
+                            size={30}
+                            color={
+                              currentRating <= (hover.foodRate || foodRating)
+                                ? '#2DC773'
+                                : ' #7B8982'
+                            }
+                            onMouseEnter={() =>
+                              setHover({
+                                ...hover,
+                                foodRate: currentRating,
+                              })
+                            }
+                            onMouseLeave={() =>
+                              setHover({
+                                ...hover,
+                                foodRate: null,
+                              })
+                            }
+                          />
+                        </label>
+                      );
+                    })}
+                  </div>
+                  <p>Stars: {foodRating}</p>
+                </div>
+
+                {/* CULTURE RATING */}
+                <div className='mt-4'>
+                  <h1
+                    htmlFor='password'
+                    className='block text-slate-950 font-lg font-bold rounded-lg text-base'
+                  >
+                    Rate the Culture 🫶
+                  </h1>
+                  <div className='city-rating rating'>
+                    {[...Array(5)].map((star, index) => {
+                      const currentRating = index + 1;
+                      return (
+                        <label key={index}>
+                          <input
+                            type='radio'
+                            name='rating'
+                            value={currentRating}
+                            onClick={() => setPeopleRating(currentRating)}
+                          />
+                          <FaStar
+                            className='star  mt-2 mr-2'
+                            size={30}
+                            color={
+                              currentRating <=
+                              (hover.peopleRate || peopleRating)
+                                ? '#2DC773'
+                                : ' #7B8982'
+                            }
+                            onMouseEnter={() =>
+                              setHover({
+                                ...hover,
+                                peopleRate: currentRating,
+                              })
+                            }
+                            onMouseLeave={() =>
+                              setHover({
+                                ...hover,
+                                peopleRate: null,
+                              })
+                            }
+                          />
+                        </label>
+                      );
+                    })}
+                  </div>
+                  <p>Stars: {peopleRating}</p>
+                </div>
+
+                {/* SAFETY RATING */}
+                <div className='mt-4'>
+                  <h1
+                    htmlFor='password'
+                    className='block text-slate-950 font-lg font-bold rounded-lg text-base'
+                  >
+                    Rate Safety 👍
+                  </h1>
+                  <div className='city-rating rating'>
+                    {[...Array(5)].map((star, index) => {
+                      const currentRating = index + 1;
+                      return (
+                        <label key={index}>
+                          <input
+                            type='radio'
+                            name='rating'
+                            value={currentRating}
+                            onClick={() => setSafetyRating(currentRating)}
+                          />
+                          <FaStar
+                            className='star  mt-2 mr-2'
+                            size={30}
+                            color={
+                              currentRating <=
+                              (hover.safetyRate || safetyRating)
+                                ? '#2DC773'
+                                : ' #7B8982'
+                            }
+                            onMouseEnter={() =>
+                              setHover({
+                                ...hover,
+                                safetyRate: currentRating,
+                              })
+                            }
+                            onMouseLeave={() =>
+                              setHover({
+                                ...hover,
+                                safetyRate: null,
+                              })
+                            }
+                          />
+                        </label>
+                      );
+                    })}
+                  </div>
+                  <p>Stars: {safetyRating}</p>
+                </div>
+
+                {/* WEATHER RATING */}
+                <div className='mt-4'>
+                  <h1
+                    htmlFor='password'
+                    className='block text-slate-950 font-lg font-bold rounded-lg text-base'
+                  >
+                    Rate the Weather ⛅️
+                  </h1>
+                  <div className='city-rating rating'>
+                    {[...Array(5)].map((star, index) => {
+                      const currentRating = index + 1;
+                      return (
+                        <label key={index}>
+                          <input
+                            type='radio'
+                            name='rating'
+                            value={currentRating}
+                            onClick={() => setWeatherRating(currentRating)}
+                          />
+                          <FaStar
+                            className='star  mt-2 mr-2'
+                            size={30}
+                            color={
+                              currentRating <=
+                              (hover.weatherRate || weatherRating)
+                                ? '#2DC773'
+                                : ' #7B8982'
+                            }
+                            onMouseEnter={() =>
+                              setHover({
+                                ...hover,
+                                weatherRate: currentRating,
+                              })
+                            }
+                            onMouseLeave={() =>
+                              setHover({
+                                ...hover,
+                                weatherRate: null,
+                              })
+                            }
+                          />
+                        </label>
+                      );
+                    })}
+                  </div>
+                  <p>Stars: {weatherRating}</p>
+                </div>
+              </div>
             </div>
 
             <div className='mt-8'>
