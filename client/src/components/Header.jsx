@@ -32,6 +32,7 @@ const Header = () => {
     <header>
       <nav className='bg-white px-4 lg:px-6 py-4 border-b border-gray-300'>
         <div className='flex flex-wrap justify-between items-center mx-auto max-w-screen-xl'>
+          {/* <img src="" alt="" className='w-24 h-24' /> */}
           <a
             href='/'
             style={{ textDecoration: 'none' }}
@@ -79,14 +80,14 @@ const Header = () => {
                 <NavLink
                   to='/dashboard'
                   style={{ textDecoration: 'none' }}
-                  className='text-slate-950 font-lg font-bold rounded-lg text-base py-2 lg:py-2.5 mr-6'
+                  className='text-slate-950 font-lg font-bold hover:text-blue-700 rounded-lg text-base py-2 lg:py-2.5 mr-6'
                 >
                   Dashboard
                 </NavLink>
                 <NavLink
                   to='/auth'
                   style={{ textDecoration: 'none' }}
-                  className='text-slate-950 font-lg font-bold rounded-lg text-base py-2 lg:py-2.5 mr-6'
+                  className='text-slate-950 font-lg font-bold hover:text-teal-500 rounded-lg text-base py-2 lg:py-2.5 mr-6'
                 >
                   Log in
                 </NavLink>
