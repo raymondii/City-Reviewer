@@ -21,7 +21,7 @@ function Review() {
   return (
     <>
       <section className='flex items-center mt-6 mb-20 px-4'>
-        <div className='bg-blue-700 p-8 rounded-xl shadow-md max-w-screen-lg w-full mx-auto'>
+        <div className='bg-teal-700 p-8 rounded-xl shadow-md max-w-screen-lg w-full mx-auto'>
           <h2 className='text-3xl text-white font-semibold mb-2'>
             {review.cityName}
           </h2>

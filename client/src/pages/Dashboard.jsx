@@ -36,7 +36,7 @@ function Dashboard() {
               <input
                 type='search'
                 className='w-full border-none bg-transparent rounded-xlg m-1 px-4 py-2 text-gray-900'
-                placeholder='Search for city'
+                placeholder='Search for city ex. Los Angeles, CA'
                 value={searchInput}
                 onChange={handleInputChange}
               />
@@ -62,7 +62,7 @@ function Dashboard() {
                     className='col-span-2 md:col-span-1 flex flex-col justify-end relative'
                   >
                     <div className='col-span-2 md:col-span-1 flex flex-col justify-start relative'>
-                      <div className='col-span-2 h-96 rounded-xl md:col-span-1 flex flex-col bg-blue-700 justify-start relative overflow-hidden'>
+                      <div className='col-span-2 h-96 rounded-xl md:col-span-1 flex flex-col bg-teal-700 justify-start relative overflow-hidden'>
                         <div className='absolute top-0 left-0 right-0 px-6 py-4 text-white'>
                           <h2 className='font-bold text-3xl'>
                             {review.cityName}
@@ -73,7 +73,10 @@ function Dashboard() {
                           >
                             {review.user.username}
                           </Link>
-                          <p className='mt-2'>Created on:{review.createdAt} </p>
+                          <p className='mt-2'>
+                            Created on:{' '}
+                            {dayjs(review.createdAt).format('MM/DD/YY')}{' '}
+                          </p>
                           <div className='text-3xl mb-3 flex'>
                             {[...Array(review.cityRating)].map((r, index) => (
                               <FaStar
@@ -92,7 +95,7 @@ function Dashboard() {
                         <div className='flex justify-end absolute bottom-0 right-0 m-6'>
                           <Link
                             to={`/review/${review._id}`}
-                            className='rounded-lg px-6 py-2 font-semibold text-white bg-emerald-500 hover:bg-emerald-600'
+                            className='rounded-lg px-6 py-2 font-semibold text-white bg-sky-950 hover:bg-sky-500'
                           >
                             See More
                           </Link>

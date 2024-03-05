@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { useStore } from '../store';
@@ -22,16 +23,13 @@ function Home() {
           </div>
 
           <div className='flex justify-center px-4'>
-            <div className='w-[60rem] rounded-xl p-1 bg-white border-2 border-slate-950 flex'>
-              <input
-                type='search'
-                className='w-full border-none bg-transparent rounded-xlg m-1 px-4 py-1 text-gray-900'
-                placeholder='Search for city'
-              />
-              <button className='m-1 rounded-lg px-6 py-2 font-semibold text-gray-100 bg-blue-700 hover:bg-blue-800'>
-                Search
-              </button>
-            </div>
+            <NavLink
+              to='/dashboard'
+              style={{ textDecoration: 'none' }}
+              className='text-white bg-teal-700 hover:bg-teal-500 font-lg font-bold rounded-lg text-xl px-4 lg:px-12 py-2 lg:py-2.5'
+            >
+              Click Here to View All Reviews!
+            </NavLink>
           </div>
         </section>
 

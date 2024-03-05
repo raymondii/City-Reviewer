@@ -93,6 +93,7 @@ function WriteAReview() {
                 type='text'
                 value={reviewCityName}
                 className='mt-1 p-2 w-full border rounded-md'
+                placeholder='ex: Los Angeles, CA'
               />
             </div>
 
@@ -133,7 +134,7 @@ function WriteAReview() {
                         size={30}
                         color={
                           currentRating <= (hover.cityRate || cityRating)
-                            ? '#2DC773'
+                            ? 'rgb(20 184 166)'
                             : ' #7B8982'
                         }
                         onMouseEnter={() =>
@@ -153,7 +154,7 @@ function WriteAReview() {
                   );
                 })}
               </div>
-              <p>Stars: {cityRating}</p>
+              {/* <p>Stars: {cityRating}</p> */}
             </div>
 
             <div className='flex flex-wrap'>
@@ -185,7 +186,7 @@ function WriteAReview() {
                             color={
                               currentRating <=
                               (hover.dayActivitiesRate || dayActivitiesRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -205,7 +206,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {dayActivitiesRating}</p>
+                  {/* <p>Stars: {dayActivitiesRating}</p> */}
                 </div>
 
                 {/* OUTDOOR ACT RATING */}
@@ -236,7 +237,7 @@ function WriteAReview() {
                               currentRating <=
                               (hover.outdoorActivitiesRate ||
                                 outdoorActivitiesRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -256,7 +257,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {outdoorActivitiesRating}</p>
+                  {/* <p>Stars: {outdoorActivitiesRating}</p> */}
                 </div>
 
                 {/* NIGHTLIFE ACT RATING */}
@@ -284,7 +285,7 @@ function WriteAReview() {
                             color={
                               currentRating <=
                               (hover.nightlifeRate || nightLifeRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -304,7 +305,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {nightLifeRating}</p>
+                  {/* <p>Stars: {nightLifeRating}</p> */}
                 </div>
 
                 {/* COST RATING */}
@@ -331,7 +332,7 @@ function WriteAReview() {
                             size={30}
                             color={
                               currentRating <= (hover.costRate || costRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -351,7 +352,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {costRating}</p>
+                  {/* <p>Stars: {costRating}</p> */}
                 </div>
               </div>
               <div className='w-full md:w-1/2'>
@@ -379,7 +380,7 @@ function WriteAReview() {
                             size={30}
                             color={
                               currentRating <= (hover.foodRate || foodRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -399,7 +400,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {foodRating}</p>
+                  {/* <p>Stars: {foodRating}</p> */}
                 </div>
 
                 {/* CULTURE RATING */}
@@ -427,7 +428,7 @@ function WriteAReview() {
                             color={
                               currentRating <=
                               (hover.peopleRate || peopleRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -447,7 +448,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {peopleRating}</p>
+                  {/* <p>Stars: {peopleRating}</p> */}
                 </div>
 
                 {/* SAFETY RATING */}
@@ -475,7 +476,7 @@ function WriteAReview() {
                             color={
                               currentRating <=
                               (hover.safetyRate || safetyRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -495,7 +496,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {safetyRating}</p>
+                  {/* <p>Stars: {safetyRating}</p> */}
                 </div>
 
                 {/* WEATHER RATING */}
@@ -523,7 +524,7 @@ function WriteAReview() {
                             color={
                               currentRating <=
                               (hover.weatherRate || weatherRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -543,15 +544,15 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {weatherRating}</p>
+                  {/* <p>Stars: {weatherRating}</p> */}
                 </div>
               </div>
             </div>
 
-            <div className='mt-8'>
+            <div className='mt-12'>
               <button
                 type='submit'
-                className='w-full p-3 bg-blue-700 font-bold text-white rounded-md hover:bg-blue-800'
+                className='w-full p-3 bg-teal-700 font-bold text-white rounded-md hover:bg-teal-500'
               >
                 Submit
               </button>
@@ -630,7 +631,7 @@ export default WriteAReview;
 //                         size={30}
 //                         color={
 //                           currentRating <= (hover || rating)
-//                             ? '#2DC773'
+//                             ? 'rgb(20 184 166)'
 //                             : ' #7B8982'
 //                         }
 //                         onMouseEnter={() => setHover(currentRating)}
