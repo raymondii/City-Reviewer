@@ -73,7 +73,7 @@ const reviewSchema = new Schema(
     },
   },
   {
-    timestamps: false,
+    timestamps: true,
   }
 );
 
