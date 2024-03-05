@@ -52,11 +52,11 @@ const Header = () => {
                 </NavLink>
 
                 <NavLink
-                  to='#'
+                  to='/myreviews'
                   style={{ textDecoration: 'none' }}
                   className='text-slate-950 font-lg font-bold rounded-lg text-base py-2 lg:py-2.5 mr-6'
                 >
-                  Your Reviews
+                  My Reviews
                 </NavLink>
 
                 <NavLink

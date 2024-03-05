@@ -18,7 +18,7 @@ const resolvers = {
     getReviewById: async (_, { review_id }) => {
       try {
         console.log('Review ID:', review_id);
-        const review = await Review.findById(review_id);
+        const review = await Review.findById(review_id).populate('user');
         return review;
       } catch (error) {
         throw new Error('Failed to fetch review');
