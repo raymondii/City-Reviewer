@@ -32,14 +32,20 @@ const Header = () => {
     <header>
       <nav className='bg-white px-4 lg:px-6 py-4 border-b border-gray-300'>
         <div className='flex flex-wrap justify-between items-center mx-auto max-w-screen-xl'>
-          {/* <img src="" alt="" className='w-24 h-24' /> */}
-          <a
-            href='/'
-            style={{ textDecoration: 'none' }}
-            className='flex items-center no-underline'
-          >
-            <h1 className='text-3xl font-bold text-slate-950'>City Review</h1>
-          </a>
+
+          <div className='flex'>
+
+            <img src="../public/assets/airplane_black_logo.png" alt="" className='w-24 h-24' />
+            <a
+              href='/'
+              style={{ textDecoration: 'none' }}
+              className='flex items-center no-underline'
+            >
+              <h1 className='text-3xl font-bold text-slate-950'>City Review</h1>
+            </a>
+
+          </div>
+
           <div className='flex items-center'>
             {state.user ? (
               <>
