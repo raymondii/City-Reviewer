@@ -45,9 +45,9 @@ function App() {
         <Route
           path='/writeareview'
           element={
-            // <Protect>
-            <WriteAReview />
-            // </Protect>
+            <Protect>
+              <WriteAReview />
+            </Protect>
           }
         />
 
