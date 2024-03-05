@@ -4,17 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "install": "cd ./server && npm i",
-    "build:client": "cd ./client && npm run build",
-    "add": "git add -A",
-    "commit": "git commit -m \"ready for deploy\"",
-    "deploy": "npm run build:client && npm run add && npm run commit && git push heroku HEAD:main",
-    "dev": "concurrently \"cd ./client && npm run dev\" \"cd ./server && npm run dev\"",
-    "start": "cd ./server && npm start",
-    "start:test": "cd ./server && NODE_ENV=production npm start"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
-
-
   "dependencies": {
     "@apollo/client": "^3.9.5",
     "axios": "^1.6.7",
@@ -37,7 +31,5 @@
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "vite": "^5.1.4"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
