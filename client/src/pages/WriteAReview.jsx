@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 
 import { CREATE_REVIEW } from '../graphql/mutations';
-import { GET_ALL_REVIEWS } from '../graphql/queries';
+import { GET_ALL_REVIEWS, GET_USER_BY_ID } from '../graphql/queries';
 // import {  } from '../graphql/queries'
 
 function WriteAReview() {
@@ -29,7 +29,7 @@ function WriteAReview() {
       safetyRating: 5,
       weatherRating: 5,
     },
-    refetchQueries: [GET_ALL_REVIEWS],
+    refetchQueries: [GET_ALL_REVIEWS, GET_USER_BY_ID],
   });
 
   const writeAReview = async (e) => {

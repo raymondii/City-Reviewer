@@ -8,6 +8,7 @@ import Protect from './components/Protect';
 import Dashboard from './pages/Dashboard';
 import Review from './pages/Review';
 import User from './pages/User';
+import MyReviews from './pages/MyReviews';
 import WriteAReview from './pages/WriteAReview';
 import NotFound from './pages/NotFound';
 
@@ -39,7 +40,7 @@ function App() {
 
         <Route path='/dashboard' element={<Dashboard />} />
 
-        <Route path='/review' element={<Review />} />
+        <Route path='/review/:id' element={<Review />} />
 
         <Route
           path='/writeareview'
@@ -50,11 +51,13 @@ function App() {
           }
         />
 
+        <Route path='/user/:id' element={<User />} />
+
         <Route
-          path='/user'
+          path='/myreviews'
           element={
             <Protect>
-              <User />
+              <MyReviews />
             </Protect>
           }
         />
