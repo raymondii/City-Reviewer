@@ -11,8 +11,17 @@ import dayjs from 'dayjs';
 function Dashboard() {
   const { state, setState } = useStore();
   const { data: reviewData, loading } = useQuery(GET_ALL_REVIEWS);
+  const [searchInput, setSearchInput] = useState('');
 
   if (loading) return <p>Loading...</p>;
+
+  const filteredCities = reviewData?.getAllReviews.filter((review) =>
+    review.cityName.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
+  const handleInputChange = (event) => {
+    setSearchInput(event.target.value);
+  };
 
   {
     console.log(reviewData);
@@ -23,15 +32,14 @@ function Dashboard() {
       <main>
         <section className='py-6'>
           <div className='flex justify-center px-4'>
-            <div className='w-[60rem] rounded-xl p-1 bg-white border-2 border-slate-950 flex'>
+            <div className='w-[60rem] rounded-xl  bg-white border-2 border-slate-950 flex'>
               <input
                 type='search'
-                className='w-full border-none bg-transparent rounded-xlg m-1 px-4 py-1 text-gray-900'
+                className='w-full border-none bg-transparent rounded-xlg m-1 px-4 py-2 text-gray-900'
                 placeholder='Search for city'
+                value={searchInput}
+                onChange={handleInputChange}
               />
-              <button className='m-1 rounded-lg px-6 py-2 font-semibold text-gray-100 bg-blue-700 hover:bg-blue-800'>
-                Search
-              </button>
             </div>
           </div>
         </section>
@@ -42,10 +50,10 @@ function Dashboard() {
               Cities Reviewed
             </h3>
             {/* IF NO REVIEWS */}
-            {!reviewData?.getAllReviews.length && <h2>No Reviews Avilable</h2>}
+            {!filteredCities.length && <h2>No Reviews Avilable</h2>}
             <div className=' grid  grid-cols-2 gap-8'>
               {/* CONTAINERS */}
-              {reviewData?.getAllReviews
+              {filteredCities
                 .slice()
                 .reverse()
                 .map((review, index) => (
