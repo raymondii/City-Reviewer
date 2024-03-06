@@ -5,6 +5,7 @@ import { FaStar } from 'react-icons/fa';
 
 import { GET_USER_BY_ID } from '../graphql/queries';
 import { GET_ALL_REVIEWS } from '../graphql/queries';
+import Loading from '../components/Loading';
 
 import dayjs from 'dayjs';
 
@@ -18,7 +19,7 @@ function User() {
     }
   );
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
 
   return (
     <>
@@ -31,7 +32,7 @@ function User() {
               Reviewed Cities 🏙️
             </h3>
             {/* IF NO REVIEWS */}
-            {!user.reviews?.length && <h2>No Reviews Avilable</h2>}
+            {!user.reviews?.length && <h2>No Reviews Available</h2>}
             <div className=' grid  grid-cols-2 gap-8'>
               {/* CONTAINERS */}
               {user.reviews

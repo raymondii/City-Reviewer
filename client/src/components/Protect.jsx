@@ -30,40 +30,7 @@
 
 // export default Protect;
 
-// SECOND V
-// import { useEffect, useState } from 'react';
-// import { useStore } from '../store';
-// import { useNavigate, useLocation } from 'react-router-dom';
-
-// function Protect({ children }) {
-//   const { state } = useStore();
-//   const navigate = useNavigate();
-//   const location = useLocation();
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     if (state.user && location.pathname === '/auth') {
-//       navigate('/dashboard');
-//     }
-
-//     if (
-//       !state.user &&
-//       (location.pathname === '/myreviews' ||
-//         location.pathname === '/writeareview')
-//     ) {
-//       navigate('/auth');
-//     }
-
-//     setLoading(false); // Set loading to false after checking authentication
-//   }, [state.user, location.pathname, navigate]);
-
-//   // Render children only when loading is false
-//   return loading ? null : <>{children}</>;
-// }
-
-// export default Protect;
-
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useStore } from '../store';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -73,8 +40,19 @@ function Protect({ children }) {
   const location = useLocation();
 
   useEffect(() => {
-    if (!state.user && location.pathname !== '/auth') {
+    // Check if the user is authenticated
+    const isAuthenticated = state.user !== null;
+
+    if (!isAuthenticated && location.pathname !== '/auth') {
+      // If the user is not authenticated and the current location is not the authentication page
+      // redirect to the authentication page
+      console.log(isAuthenticated);
       navigate('/auth');
+    } else if (isAuthenticated && location.pathname === '/auth') {
+      // If the user is authenticated and the current location is the authentication page
+      // redirect to the dashboard page
+      console.log(isAuthenticated);
+      navigate('/dashboard');
     }
   }, [state.user, location.pathname, navigate]);
 

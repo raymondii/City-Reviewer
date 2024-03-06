@@ -84,10 +84,36 @@ export const DELETE_REVIEW = gql`
   }
 `;
 
-// export const EDIT_NOTE = gql`
-//   mutation EditNote($text: String!, $note_id: ID) {
-//     editNote(text: $text, note_id: $note_id) {
-//       message
-//     }
-//   }
-// `
+export const UPDATE_REVIEW = gql`
+  mutation UpdateReview(
+    $cityName: String!
+    $cityRating: Int!
+    $body: String!
+    $dayActivitiesRating: Int!
+    $outdoorActivitiesRating: Int!
+    $nightLifeRating: Int!
+    $costRating: Int!
+    $foodRating: Int!
+    $peopleRating: Int!
+    $safetyRating: Int!
+    $weatherRating: Int!
+    $review_id: ID
+  ) {
+    updateReview(
+      cityName: $cityName
+      cityRating: $cityRating
+      body: $body
+      dayActivitiesRating: $dayActivitiesRating
+      outdoorActivitiesRating: $outdoorActivitiesRating
+      nightLifeRating: $nightLifeRating
+      costRating: $costRating
+      foodRating: $foodRating
+      peopleRating: $peopleRating
+      safetyRating: $safetyRating
+      weatherRating: $weatherRating
+      review_id: $review_id
+    ) {
+      message
+    }
+  }
+`;

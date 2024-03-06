@@ -6,6 +6,8 @@ import { FaStar } from 'react-icons/fa';
 
 import { GET_ALL_REVIEWS } from '../graphql/queries';
 
+import Loading from '../components/Loading';
+
 import dayjs from 'dayjs';
 
 function Dashboard() {
@@ -13,7 +15,7 @@ function Dashboard() {
   const { data: reviewData, loading } = useQuery(GET_ALL_REVIEWS);
   const [searchInput, setSearchInput] = useState('');
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
 
   const filteredCities = reviewData?.getAllReviews.filter((review) =>
     review.cityName.toLowerCase().includes(searchInput.toLowerCase())
@@ -21,6 +23,10 @@ function Dashboard() {
 
   const handleInputChange = (event) => {
     setSearchInput(event.target.value);
+  };
+
+  const handleClearSearch = () => {
+    setSearchInput('');
   };
 
   {
@@ -31,7 +37,7 @@ function Dashboard() {
     <>
       <main>
         <section className='py-6'>
-          <div className='flex justify-center px-4'>
+          <div className='flex justify-center mx-4'>
             <div className='w-[60rem] rounded-xl  bg-white border-2 border-slate-950 flex'>
               <input
                 type='search'
@@ -50,7 +56,26 @@ function Dashboard() {
               Cities Reviewed
             </h3>
             {/* IF NO REVIEWS */}
-            {!filteredCities.length && <h2>No Reviews Avilable</h2>}
+            {!filteredCities.length && (
+              <>
+                <div className='flex flex-col items-center justify-center '>
+                  <h2 className='mt-16 text-3xl font-base text-center'>
+                    No results for this city! 😅
+                  </h2>
+                  <p className='mt-4 max-w-3xl text-gray-600 text-xl font-base text-center'>
+                    Sorry, we couldn't find any reviews for this city. Check
+                    back later or contribute your own review to help others
+                    discover this destination!
+                  </p>
+                  <button
+                    onClick={handleClearSearch}
+                    className='mt-8 text-white  bg-sky-950 hover:bg-sky-500 text-lg font-semibold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5'
+                  >
+                    Clear Search
+                  </button>
+                </div>
+              </>
+            )}
             <div className=' grid  grid-cols-2 gap-8'>
               {/* CONTAINERS */}
               {filteredCities

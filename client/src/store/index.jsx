@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useReducer,
-  useState,
-  useEffect,
-} from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { AUTHENTICATE } from '../graphql/queries';
 
@@ -15,6 +9,7 @@ export function StoreProvider({ children }) {
   const { data: userData } = useQuery(AUTHENTICATE);
   const [state, setState] = useState({
     user: null,
+    // updateReview: null,
     loading: true,
   });
 

@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
-import dayjs from 'dayjs';
-import { useStore } from '../store';
 
 function Home() {
   return (
@@ -52,9 +49,10 @@ function Home() {
                     <a href='#'>
                       <h2 className='font-bold text-xl'>Camden, ME</h2>
                       <p className='mb-3 description'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam sagittis nunc vel ipsum ultricies, eget fermentum
-                        felis finibus.
+                        Coastal charm meets scenic beauty. Sail the Penobscot
+                        Bay, hike Camden Hills, savor fresh seafood, and explore
+                        quaint shops. Perfect summer getaway for a classical
+                        summer experience.
                       </p>
                     </a>
                   </div>
@@ -74,9 +72,11 @@ function Home() {
                     <a href='#'>
                       <h2 className='font-bold text-xl'>Chicago, IL</h2>
                       <p className='mb-3 description'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam sagittis nunc vel ipsum ultricies, eget fermentum
-                        felis finibus.
+                        Dynamic city on Lake Michigan. Explore iconic
+                        architecture, vibrant neighborhoods, world-class
+                        museums, and diverse cuisine. Summer boasts festivals,
+                        beaches, and outdoor concerts. Unforgettable urban
+                        experience.
                       </p>
                     </a>
                   </div>
@@ -96,9 +96,10 @@ function Home() {
                     <a href='#'>
                       <h2 className='font-bold text-xl'>San Deigo, CA</h2>
                       <p className='mb-3 description'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam sagittis nunc vel ipsum ultricies, eget fermentum
-                        felis finibus.
+                        Sunny paradise with stunning beaches, perfect waves for
+                        surfing, and vibrant waterfront. Enjoy outdoor
+                        activities, renowned zoo, and diverse culinary scene.
+                        Ideal summer destination.
                       </p>
                     </a>
                   </div>
@@ -118,9 +119,10 @@ function Home() {
                     <a href='#'>
                       <h2 className='font-bold text-xl'>Orlando, FL</h2>
                       <p className='mb-3 description'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam sagittis nunc vel ipsum ultricies, eget fermentum
-                        felis finibus.
+                        Home to world-famous theme parks like Disney World and
+                        Universal Studios. Sunny weather, endless entertainment
+                        options, and family-friendly attractions make it a
+                        summer hotspot.
                       </p>
                     </a>
                   </div>

@@ -1,22 +1,24 @@
 import { useQuery, useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GET_USER_BY_ID, GET_ALL_REVIEWS } from '../graphql/queries';
-import { DELETE_REVIEW } from '../graphql/mutations';
+import { DELETE_REVIEW, UPDATE_REVIEW } from '../graphql/mutations';
 import { useStore } from '../store';
 import { FaStar } from 'react-icons/fa';
+import Loading from '../components/Loading';
 
 import dayjs from 'dayjs';
 
 function MyReviews() {
-  const { state } = useStore(); // Access the authentication state
+  const { state, setState } = useStore(); // Access the authentication state
   const userId = state.user?._id; // Assuming the user ID is stored in the user object
+  const navigate = useNavigate();
 
   // Check if userId exists before querying
   const { data: { getUserbyId: user } = {}, loading } = useQuery(
     GET_USER_BY_ID,
     {
       variables: { user_id: userId }, // Use the retrieved user ID
-      // skip: !userId, // Skip the query if userId is null or undefined
+      skip: !userId, // Skip the query if userId is null or undefined
     }
   );
 
@@ -37,7 +39,18 @@ function MyReviews() {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  // Edit
+  const handleUpdateReview = (review) => {
+    setState({
+      ...state,
+      updateReview: review,
+    });
+    console.log(review);
+
+    navigate('/writeareview');
+  };
+
+  if (loading) return <Loading />;
 
   return (
     <>
@@ -90,6 +103,12 @@ function MyReviews() {
                         </div>
                         {/* Button positioned at the bottom right */}
                         <div className='flex justify-end absolute bottom-0 right-0 m-6'>
+                          {/* <button
+                            onClick={() => handleUpdateReview(review._id)}
+                            className='rounded-lg w-28 px-6 py-2 mr-4 font-semibold text-white bg-black hover:bg-red-800 hover:border-black'
+                          >
+                            Edit
+                          </button> */}
                           <button
                             onClick={() =>
                               handleDeleteReview(review._id, index)
