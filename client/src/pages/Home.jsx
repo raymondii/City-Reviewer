@@ -1,4 +1,7 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
+import dayjs from 'dayjs';
+import { useStore } from '../store';
 import { NavLink } from 'react-router-dom';
 
 function Home() {
@@ -32,7 +35,7 @@ function Home() {
 
         <section className='mb-20'>
           <div className='mx-auto max-w-7xl px-4'>
-            <h3 className='text-left mb-4 text-3xl font-bold text-slate-950'>
+            <h3 className='text-left mb-4 text-3xl font-bold text-slate-950 '>
               Best Cities for Summer 2024 ☀️
             </h3>
             <div className=' grid  grid-cols-2 gap-8'>
