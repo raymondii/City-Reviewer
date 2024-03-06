@@ -137,7 +137,7 @@ function WriteAReview() {
 
   return (
     <>
-      <section className='flex items-center mt-6 px-4'>
+      <section className='flex items-center my-6 px-4'>
         <div className='bg-white p-8 rounded-xl shadow-md max-w-screen-lg w-full mx-auto border-2 border-slate-950'>
           <h2 className='text-3xl font-semibold mb-4'>Review City!</h2>
 
