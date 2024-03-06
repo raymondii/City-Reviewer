@@ -62,7 +62,17 @@ function MyReviews() {
             </h3>
             {/* IF NO REVIEWS */}
             {!user?.reviews?.length && (
-              <h2>No reviews available. Write your first review!</h2>
+              <>
+                <div className='flex flex-col items-center justify-center '>
+                  <h2 className='mt-16 text-3xl font-base text-center'>
+                    No reviews yet! ✍️
+                  </h2>
+                  <p className='mt-4 max-w-3xl text-gray-600 text-xl font-base text-center'>
+                    Take a moment to help others explore new destinations by
+                    sharing your expereiences of places you've been to!
+                  </p>
+                </div>
+              </>
             )}
             <div className='grid grid-cols-2 gap-8'>
               {/* CONTAINERS */}
@@ -80,10 +90,11 @@ function MyReviews() {
                           <h2 className='font-bold text-3xl'>
                             {review.cityName}
                           </h2>
+                          <hr className='h-0.5 my-3 bg-sky-950 border-0 rounded-full' />
                           <h3 className='font-semibold text-xl'>
                             {user?.username}
                           </h3>
-                          <p className='mt-2'>
+                          <p className='mb-2 opacity-50'>
                             Created on:{' '}
                             {dayjs(review.createdAt).format('MM/DD/YY')}{' '}
                           </p>

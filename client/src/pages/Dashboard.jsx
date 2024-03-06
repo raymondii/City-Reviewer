@@ -92,13 +92,14 @@ function Dashboard() {
                           <h2 className='font-bold text-3xl'>
                             {review.cityName}
                           </h2>
+                          <hr className='h-0.5 my-3 bg-sky-950 border-0 rounded-full' />
                           <Link
                             to={`/user/${review.user._id}`}
                             className='font-semibold text-xl'
                           >
                             {review.user.username}
                           </Link>
-                          <p className='mt-2'>
+                          <p className='mb-2 opacity-50'>
                             Created on:{' '}
                             {dayjs(review.createdAt).format('MM/DD/YY')}{' '}
                           </p>
