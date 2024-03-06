@@ -16,7 +16,7 @@ function FormComponent({
     <div className={`container ${active ? 'active' : ''} flex mx-auto mt-20`}>
       <div className='form-container sign-up'>
         <form onSubmit={onSubmit}>
-          <h1>Create Account</h1>
+          <h1 className='font-bold text-xl'>Create Account</h1>
           <span>or use your email for registration</span>
           <input
             type='text'
@@ -41,7 +41,7 @@ function FormComponent({
       </div>
       <div className='form-container sign-in'>
         <form onSubmit={onSubmit}>
-          <h1>Sign In</h1>
+          <h1 className='font-bold text-xl'>Sign In</h1>
           <span>or use your email password</span>
           <input
             name='email'
@@ -55,21 +55,21 @@ function FormComponent({
             type='password'
             placeholder='Password'
           />
-          <a href='#'>Forget Your Password?</a>
+          {/* <a href='#'>Forget Your Password?</a> */}
           <button>Sign In</button>
         </form>
       </div>
       <div className='toggle-container'>
         <div className='toggle'>
           <div className='toggle-panel toggle-left'>
-            <h1>Welcome Back!</h1>
+            <h1 className='font-bold text-xl'>Welcome Back!</h1>
             <p>Enter your personal details to use all site features</p>
             <button className='sign-in-btn' onClick={onLoginClick}>
               Sign In
             </button>
           </div>
           <div className='toggle-panel toggle-right'>
-            <h1>Hello, Explorer!</h1>
+            <h1 className='font-bold text-xl'>Hi, There!</h1>
             <p>Register with your personal details to use all site features</p>
             <button className='sign-up-btn' onClick={onRegisterClick}>
               Sign Up

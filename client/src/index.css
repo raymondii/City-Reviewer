@@ -10,7 +10,7 @@
   font-weight: 400;
   color-scheme: light;
   --primary-color: #2353b9;
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.895);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -66,7 +66,7 @@ input[type=radio] {
 }
 
 .container button {
-  background-color: black;
+  background-color: rgb(15 118 110);
   color: #fff;
   font-size: 12px;
   padding: 10px 45px;

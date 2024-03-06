@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useReducer,
-  useState,
-  useEffect,
-} from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { AUTHENTICATE } from '../graphql/queries';
 
@@ -14,9 +8,8 @@ const Context = createContext();
 export function StoreProvider({ children }) {
   const { data: userData } = useQuery(AUTHENTICATE);
   const [state, setState] = useState({
-    showNoteForm: false,
-    editNote: null,
     user: null,
+    // updateReview: null,
     loading: true,
   });
 
@@ -44,16 +37,3 @@ export function StoreProvider({ children }) {
 
 // Create a custom hook to use the store
 export const useStore = () => useContext(Context);
-
-// // Create the provider component
-// export const StoreProvider = ({ children }) => {
-//   const [state, dispatch] = useReducer(reducer, initialState);
-
-//   return (
-//     <StoreContext.Provider value={{ state, dispatch }}>
-//       {children}
-//     </StoreContext.Provider>
-//   );
-// };
-
-// export const useStore = () => useContext(Context)

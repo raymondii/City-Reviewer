@@ -1,20 +1,24 @@
 import { useQuery, useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GET_USER_BY_ID, GET_ALL_REVIEWS } from '../graphql/queries';
-import { DELETE_REVIEW } from '../graphql/mutations';
+import { DELETE_REVIEW, UPDATE_REVIEW } from '../graphql/mutations';
 import { useStore } from '../store';
 import { FaStar } from 'react-icons/fa';
+import Loading from '../components/Loading';
+
+import dayjs from 'dayjs';
 
 function MyReviews() {
-  const { state } = useStore(); // Access the authentication state
+  const { state, setState } = useStore(); // Access the authentication state
   const userId = state.user?._id; // Assuming the user ID is stored in the user object
+  const navigate = useNavigate();
 
   // Check if userId exists before querying
   const { data: { getUserbyId: user } = {}, loading } = useQuery(
     GET_USER_BY_ID,
     {
       variables: { user_id: userId }, // Use the retrieved user ID
-      // skip: !userId, // Skip the query if userId is null or undefined
+      skip: !userId, // Skip the query if userId is null or undefined
     }
   );
 
@@ -35,7 +39,18 @@ function MyReviews() {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  // Edit
+  const handleUpdateReview = (review) => {
+    setState({
+      ...state,
+      updateReview: review,
+    });
+    console.log(review);
+
+    navigate('/writeareview');
+  };
+
+  if (loading) return <Loading />;
 
   return (
     <>
@@ -60,7 +75,7 @@ function MyReviews() {
                     className='col-span-2 md:col-span-1 flex flex-col justify-end relative'
                   >
                     <div className='col-span-2 md:col-span-1 flex flex-col justify-start relative'>
-                      <div className='col-span-2 h-96 rounded-xl md:col-span-1 flex flex-col bg-blue-700 justify-start relative overflow-hidden'>
+                      <div className='col-span-2 h-96 rounded-xl md:col-span-1 flex flex-col bg-teal-700 justify-start relative overflow-hidden'>
                         <div className='absolute top-0 left-0 right-0 px-6 py-4 text-white'>
                           <h2 className='font-bold text-3xl'>
                             {review.cityName}
@@ -68,6 +83,10 @@ function MyReviews() {
                           <h3 className='font-semibold text-xl'>
                             {user?.username}
                           </h3>
+                          <p className='mt-2'>
+                            Created on:{' '}
+                            {dayjs(review.createdAt).format('MM/DD/YY')}{' '}
+                          </p>
                           <div className='text-3xl mb-3 flex'>
                             {[...Array(review.cityRating)].map((r, index) => (
                               <FaStar
@@ -84,18 +103,24 @@ function MyReviews() {
                         </div>
                         {/* Button positioned at the bottom right */}
                         <div className='flex justify-end absolute bottom-0 right-0 m-6'>
+                          {/* <button
+                            onClick={() => handleUpdateReview(review._id)}
+                            className='rounded-lg w-28 px-6 py-2 mr-4 font-semibold text-white bg-black hover:bg-red-800 hover:border-black'
+                          >
+                            Edit
+                          </button> */}
                           <button
                             onClick={() =>
                               handleDeleteReview(review._id, index)
                             }
-                            className='rounded-lg w-28 px-6 py-2 mr-4 font-semibold text-white bg-black hover:bg-rose-700 hover:border-black'
+                            className='rounded-lg w-28 px-6 py-2 mr-4 font-semibold text-white bg-black hover:bg-red-800 hover:border-black'
                           >
                             Delete
                           </button>
 
                           <Link
                             to={`/review/${review._id}`}
-                            className='rounded-lg px-6 py-2 font-semibold text-white bg-emerald-500 hover:bg-emerald-600'
+                            className='rounded-lg px-6 py-2 font-semibold text-white bg-sky-950 hover:bg-sky-500'
                           >
                             See More
                           </Link>

@@ -21,11 +21,6 @@ function App() {
     <>
       <Header />
 
-      {/* {state.loading && <Loading />}
-
-      {state.showNoteForm &&
-        <NoteForm />} */}
-
       <Routes>
         <Route path='/' element={<Home />} />
 

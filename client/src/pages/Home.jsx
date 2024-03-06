@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import { useStore } from '../store';
 import { NavLink } from 'react-router-dom';
 
-
 function Home() {
   return (
     <>
@@ -24,11 +23,13 @@ function Home() {
           </div>
 
           <div className='flex justify-center px-4'>
-            <div className='w-[60rem] rounded-xl p-1 border-slate-950 flex justify-center'>
-              <NavLink to="/dashboard" className='m-1 rounded-lg px-6 py-2 font-semibold text-gray-100 bg-blue-700 hover:bg-blue-800'>
-                Dashboard
-              </NavLink>
-            </div>
+            <NavLink
+              to='/dashboard'
+              style={{ textDecoration: 'none' }}
+              className='text-white bg-teal-700 hover:bg-teal-500 font-lg font-bold rounded-lg text-xl px-4 lg:px-12 py-2 lg:py-2.5'
+            >
+              Click Here to View All Reviews!
+            </NavLink>
           </div>
         </section>
 
@@ -51,9 +52,10 @@ function Home() {
                     <a href='#'>
                       <h2 className='font-bold text-xl'>Camden, ME</h2>
                       <p className='mb-3 description'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam sagittis nunc vel ipsum ultricies, eget fermentum
-                        felis finibus.
+                        Coastal charm meets scenic beauty. Sail the Penobscot
+                        Bay, hike Camden Hills, savor fresh seafood, and explore
+                        quaint shops. Perfect summer getaway for a classical
+                        summer experience.
                       </p>
                     </a>
                   </div>
@@ -73,9 +75,11 @@ function Home() {
                     <a href='#'>
                       <h2 className='font-bold text-xl'>Chicago, IL</h2>
                       <p className='mb-3 description'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam sagittis nunc vel ipsum ultricies, eget fermentum
-                        felis finibus.
+                        Dynamic city on Lake Michigan. Explore iconic
+                        architecture, vibrant neighborhoods, world-class
+                        museums, and diverse cuisine. Summer boasts festivals,
+                        beaches, and outdoor concerts. Unforgettable urban
+                        experience.
                       </p>
                     </a>
                   </div>
@@ -95,9 +99,10 @@ function Home() {
                     <a href='#'>
                       <h2 className='font-bold text-xl'>San Deigo, CA</h2>
                       <p className='mb-3 description'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam sagittis nunc vel ipsum ultricies, eget fermentum
-                        felis finibus.
+                        Sunny paradise with stunning beaches, perfect waves for
+                        surfing, and vibrant waterfront. Enjoy outdoor
+                        activities, renowned zoo, and diverse culinary scene.
+                        Ideal summer destination.
                       </p>
                     </a>
                   </div>
@@ -117,9 +122,10 @@ function Home() {
                     <a href='#'>
                       <h2 className='font-bold text-xl'>Orlando, FL</h2>
                       <p className='mb-3 description'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam sagittis nunc vel ipsum ultricies, eget fermentum
-                        felis finibus.
+                        Home to world-famous theme parks like Disney World and
+                        Universal Studios. Sunny weather, endless entertainment
+                        options, and family-friendly attractions make it a
+                        summer hotspot.
                       </p>
                     </a>
                   </div>

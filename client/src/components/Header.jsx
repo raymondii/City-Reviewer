@@ -75,7 +75,7 @@ const Header = () => {
                 <NavLink
                   to='/writeareview'
                   style={{ textDecoration: 'none' }}
-                  className='text-white bg-blue-700 hover:bg-blue-800 font-lg font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5'
+                  className='text-white bg-teal-700 hover:bg-teal-500 font-lg font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5'
                 >
                   Write A Review
                 </NavLink>
@@ -100,7 +100,7 @@ const Header = () => {
                 <NavLink
                   to='/writeareview'
                   style={{ textDecoration: 'none' }}
-                  className='text-white bg-blue-700 hover:bg-blue-800 font-lg font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5'
+                  className='text-white bg-teal-700 hover:bg-teal-500 font-lg font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5'
                 >
                   Write A Review
                 </NavLink>

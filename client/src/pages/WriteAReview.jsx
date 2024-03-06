@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useStore } from '../store';
 import { useNavigate } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 
-import { CREATE_REVIEW } from '../graphql/mutations';
+import { CREATE_REVIEW, UPDATE_REVIEW } from '../graphql/mutations';
 import { GET_ALL_REVIEWS, GET_USER_BY_ID } from '../graphql/queries';
-// import {  } from '../graphql/queries'
 
 function WriteAReview() {
   const { state, setState } = useStore();
   const [reviewBody, setReviewBody] = useState('');
   const [reviewCityName, setReviewCityName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   // Star rating states
@@ -57,13 +57,15 @@ function WriteAReview() {
 
   const writeAReview = async (e) => {
     e.preventDefault();
-
     try {
       await createReview();
-      // Navigate them to YOUR REVIEW WHEN PAGE IS MADE
-      navigate('/dashboard');
+      setErrorMessage('');
+      navigate('/myreviews');
     } catch (error) {
       console.log(error);
+      setErrorMessage(
+        'Please ensure all fields are filled out and a rating is provided for each category.'
+      );
     }
   };
 
@@ -75,6 +77,64 @@ function WriteAReview() {
     setReviewBody(e.target.value);
   };
 
+  // UPDATE REVIEW
+  // const [updateReview] = useMutation(UPDATE_REVIEW, {
+  //   variables: {
+  //     cityName: reviewCityName,
+  //     body: reviewBody,
+  //     cityRating: cityRating,
+
+  //     dayActivitiesRating: dayActivitiesRating,
+  //     outdoorActivitiesRating: outdoorActivitiesRating,
+  //     nightLifeRating: nightLifeRating,
+  //     costRating: costRating,
+  //     foodRating: foodRating,
+  //     peopleRating: peopleRating,
+  //     safetyRating: safetyRating,
+  //     weatherRating: weatherRating,
+  //     review_id: state.updateReview?._id,
+  //   },
+  //   refetchQueries: [GET_ALL_REVIEWS, GET_USER_BY_ID],
+  // });
+
+  // useEffect(() => {
+  //   if (state.updateReview) {
+  //     setReviewCityName(state.updateReview.cityName);
+  //     setReviewBody(state.updateReview.body);
+  //     setCityRating(state.updateReview.cityRating);
+  //     setDayActivitiesRating(state.updateReview.dayActivitiesRating);
+  //     setOutdoorActivitiesRating(state.updateReview.outdoorActivitiesRating);
+  //     setNightLifeRating(state.updateReview.nightLifeRating);
+  //     setCostRating(state.updateReview.costRating);
+  //     setFoodRating(state.updateReview.foodRating);
+  //     setPeopleRating(state.updateReview.peopleRating);
+  //     setSafetyRating(state.updateReview.safetyRating);
+  //     setWeatherRating(state.updateReview.weatherRating);
+  //   }
+  // }, []);
+
+  // const writeorEditAReview = async (e) => {
+  //   e.preventDefault();
+  //   if (!state.updateReview) {
+  //     try {
+  //       await createReview();
+  //       // Navigate them to YOUR REVIEW WHEN PAGE IS MADE
+  //       navigate('/myreviews');
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   } else {
+  //     await updateReview();
+
+  //     // setState({
+  //     //   ...state,
+  //     //   updateReview: null,
+  //     // });
+
+  //     navigate('/myreviews');
+  //   }
+  // };
+
   return (
     <>
       <section className='flex items-center mt-6 px-4'>
@@ -82,6 +142,9 @@ function WriteAReview() {
           <h2 className='text-3xl font-semibold mb-4'>Review City!</h2>
 
           <form onSubmit={writeAReview}>
+            {errorMessage && (
+              <p className='error text-red-600 text-center'>{errorMessage}</p>
+            )}
             <div className='grid grid-cols-2 gap-4'></div>
 
             <div className='mt-4'>
@@ -93,6 +156,7 @@ function WriteAReview() {
                 type='text'
                 value={reviewCityName}
                 className='mt-1 p-2 w-full border rounded-md'
+                placeholder='ex: Los Angeles, CA'
               />
             </div>
 
@@ -133,7 +197,7 @@ function WriteAReview() {
                         size={30}
                         color={
                           currentRating <= (hover.cityRate || cityRating)
-                            ? '#2DC773'
+                            ? 'rgb(20 184 166)'
                             : ' #7B8982'
                         }
                         onMouseEnter={() =>
@@ -153,7 +217,7 @@ function WriteAReview() {
                   );
                 })}
               </div>
-              <p>Stars: {cityRating}</p>
+              {/* <p>Stars: {cityRating}</p> */}
             </div>
 
             <div className='flex flex-wrap'>
@@ -185,7 +249,7 @@ function WriteAReview() {
                             color={
                               currentRating <=
                               (hover.dayActivitiesRate || dayActivitiesRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -205,7 +269,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {dayActivitiesRating}</p>
+                  {/* <p>Stars: {dayActivitiesRating}</p> */}
                 </div>
 
                 {/* OUTDOOR ACT RATING */}
@@ -236,7 +300,7 @@ function WriteAReview() {
                               currentRating <=
                               (hover.outdoorActivitiesRate ||
                                 outdoorActivitiesRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -256,7 +320,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {outdoorActivitiesRating}</p>
+                  {/* <p>Stars: {outdoorActivitiesRating}</p> */}
                 </div>
 
                 {/* NIGHTLIFE ACT RATING */}
@@ -284,7 +348,7 @@ function WriteAReview() {
                             color={
                               currentRating <=
                               (hover.nightlifeRate || nightLifeRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -304,7 +368,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {nightLifeRating}</p>
+                  {/* <p>Stars: {nightLifeRating}</p> */}
                 </div>
 
                 {/* COST RATING */}
@@ -331,7 +395,7 @@ function WriteAReview() {
                             size={30}
                             color={
                               currentRating <= (hover.costRate || costRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -351,7 +415,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {costRating}</p>
+                  {/* <p>Stars: {costRating}</p> */}
                 </div>
               </div>
               <div className='w-full md:w-1/2'>
@@ -379,7 +443,7 @@ function WriteAReview() {
                             size={30}
                             color={
                               currentRating <= (hover.foodRate || foodRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -399,7 +463,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {foodRating}</p>
+                  {/* <p>Stars: {foodRating}</p> */}
                 </div>
 
                 {/* CULTURE RATING */}
@@ -427,7 +491,7 @@ function WriteAReview() {
                             color={
                               currentRating <=
                               (hover.peopleRate || peopleRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -447,7 +511,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {peopleRating}</p>
+                  {/* <p>Stars: {peopleRating}</p> */}
                 </div>
 
                 {/* SAFETY RATING */}
@@ -475,7 +539,7 @@ function WriteAReview() {
                             color={
                               currentRating <=
                               (hover.safetyRate || safetyRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -495,7 +559,7 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {safetyRating}</p>
+                  {/* <p>Stars: {safetyRating}</p> */}
                 </div>
 
                 {/* WEATHER RATING */}
@@ -523,7 +587,7 @@ function WriteAReview() {
                             color={
                               currentRating <=
                               (hover.weatherRate || weatherRating)
-                                ? '#2DC773'
+                                ? 'rgb(20 184 166)'
                                 : ' #7B8982'
                             }
                             onMouseEnter={() =>
@@ -543,15 +607,15 @@ function WriteAReview() {
                       );
                     })}
                   </div>
-                  <p>Stars: {weatherRating}</p>
+                  {/* <p>Stars: {weatherRating}</p> */}
                 </div>
               </div>
             </div>
 
-            <div className='mt-8'>
+            <div className='mt-12'>
               <button
                 type='submit'
-                className='w-full p-3 bg-blue-700 font-bold text-white rounded-md hover:bg-blue-800'
+                className='w-full p-3 bg-teal-700 font-bold text-white rounded-md hover:bg-teal-500'
               >
                 Submit
               </button>
@@ -564,98 +628,3 @@ function WriteAReview() {
 }
 
 export default WriteAReview;
-
-//******************* Old V *********************/
-
-// import { useState } from 'react';
-// import { FaStar } from 'react-icons/fa';
-
-// function WriteAReview() {
-//   const [rating, setRating] = useState(null);
-//   const [hover, setHover] = useState(null);
-
-//   return (
-//     <>
-//       <section className='flex items-center mt-20 px-4'>
-//         <div className='bg-white p-8 rounded-xl shadow-md max-w-screen-lg w-full mx-auto border-2 border-slate-950'>
-//           <h2 className='text-3xl font-semibold mb-4'>Review City!</h2>
-
-//           <form action='#' method='POST'>
-//             <div className='grid grid-cols-2 gap-4'></div>
-
-//             <div className='mt-4'>
-//               <h2 className='block text-slate-950 font-lg font-bold rounded-lg text-base'>
-//                 City Name
-//               </h2>
-//               <input
-//                 type='text'
-//                 name='cityName'
-//                 className='mt-1 p-2 w-full border rounded-md'
-//               />
-//             </div>
-
-//             <div className='mt-4'>
-//               <h2 className='block text-slate-950 font-lg font-bold rounded-lg text-base'>
-//                 Share Your Thoughts
-//               </h2>
-//               <textarea
-//                 type='text'
-//                 name='body'
-//                 className='mt-1 p-2 min-h-16 w-full border rounded-md'
-//               />
-//             </div>
-
-//             {/* Section for tags feature if possible */}
-
-//             <div className='mt-4'>
-//               <h1
-//                 htmlFor='password'
-//                 className='block text-slate-950 font-lg font-bold rounded-lg text-base'
-//               >
-//                 Rate City
-//               </h1>
-//               <div className='city-rating rating'>
-//                 {[...Array(5)].map((star, index) => {
-//                   const currentRating = index + 1;
-//                   return (
-//                     <label>
-//                       <input
-//                         type='radio'
-//                         name='rating'
-//                         value={currentRating}
-//                         onClick={() => setRating(currentRating)}
-//                       />
-//                       <FaStar
-//                         className='star  mt-2 mr-2'
-//                         size={30}
-//                         color={
-//                           currentRating <= (hover || rating)
-//                             ? '#2DC773'
-//                             : ' #7B8982'
-//                         }
-//                         onMouseEnter={() => setHover(currentRating)}
-//                         onMouseLeave={() => setHover(null)}
-//                       />
-//                     </label>
-//                   );
-//                 })}
-//               </div>
-//               <p>Star: {rating}</p>
-//             </div>
-
-//             <div className='mt-8'>
-//               <button
-//                 type='submit'
-//                 className='w-full p-3 bg-blue-700 font-bold text-white rounded-md hover:bg-blue-800'
-//               >
-//                 Submit
-//               </button>
-//             </div>
-//           </form>
-//         </div>
-//       </section>
-//     </>
-//   );
-// }
-
-// export default WriteAReview;

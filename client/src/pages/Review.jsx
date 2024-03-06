@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
+import Loading from '../components/Loading';
 
 import { GET_REVIEW_BY_ID } from '../graphql/queries';
 
@@ -14,14 +15,14 @@ function Review() {
     }
   );
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
 
   // const { review } = reviewData;
   console.log(review);
   return (
     <>
-      <section className='flex items-center mt-6 mb-20 px-4'>
-        <div className='bg-blue-700 p-8 rounded-xl shadow-md max-w-screen-lg w-full mx-auto'>
+      <section className='flex items-center mt-6 mb-20 mx-4'>
+        <div className='bg-teal-700 p-8 rounded-xl shadow-md max-w-screen-lg w-full mx-auto'>
           <h2 className='text-3xl text-white font-semibold mb-2'>
             {review.cityName}
           </h2>
